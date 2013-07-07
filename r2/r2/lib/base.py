@@ -87,7 +87,7 @@ class BaseController(WSGIController):
             and hashlib.md5(true_client_ip + g.ip_hash).hexdigest() \
             == ip_hash.lower()):
             request.ip = true_client_ip
-        elif g.trust_local_proxies and forwarded_for and is_local_address(remote_addr):
+        elif g.trust_local_proxies and forwarded_for:# and is_local_address(remote_addr):
             request.ip = forwarded_for.split(',')[-1]
         else:
             request.ip = environ['REMOTE_ADDR']
